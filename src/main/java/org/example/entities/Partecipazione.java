@@ -1,51 +1,38 @@
 package org.example.entities;
 
-
-import org.example.enumeration.Stato;
+import org.example.enumeration.TipoStato;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "partecipazioni")
-
 public class Partecipazione {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @GeneratedValue
+    private long id;
     @ManyToOne
     @JoinColumn(name = "persona_id")
     private Persona persona;
-
-    @ManyToMany
-    @JoinTable(
-            name = "persone_partecipazioni",
-            joinColumns = @JoinColumn(name = "persona_id"),
-            inverseJoinColumns = @JoinColumn(name = "partecipazione_id")
-    )
-    private List<Persona> listaPartecipanti = new ArrayList<>();
-
+    @ManyToOne
+    @JoinColumn(name = "evento_id")
+    private Evento evento;
     @Enumerated(EnumType.STRING)
-    private Stato stato;
+    private TipoStato stato;
 
+    public Partecipazione() { }
 
-    public Partecipazione() {
-    }
-
-    public Partecipazione(Persona persona, List<Persona> listaPartecipanti, Stato stato) {
+    public Partecipazione(Persona persona, Evento evento, TipoStato stato) {
         this.persona = persona;
-        this.listaPartecipanti = listaPartecipanti;
+        this.evento = evento;
         this.stato = stato;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -57,19 +44,19 @@ public class Partecipazione {
         this.persona = persona;
     }
 
-    public List<Persona> getListaPartecipanti() {
-        return listaPartecipanti;
+    public Evento getEvento() {
+        return evento;
     }
 
-    public void setListaPartecipanti(List<Persona> listaPartecipanti) {
-        this.listaPartecipanti = listaPartecipanti;
+    public void setEvento(Evento evento) {
+        this.evento = evento;
     }
 
-    public Stato getStato() {
+    public TipoStato getStato() {
         return stato;
     }
 
-    public void setStato(Stato stato) {
+    public void setStato(TipoStato stato) {
         this.stato = stato;
     }
 
@@ -78,7 +65,7 @@ public class Partecipazione {
         return "Partecipazione{" +
                 "id=" + id +
                 ", persona=" + persona +
-                ", listaPartecipanti=" + listaPartecipanti +
+                ", evento=" + evento +
                 ", stato=" + stato +
                 '}';
     }

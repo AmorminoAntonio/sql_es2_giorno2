@@ -1,42 +1,32 @@
 package org.example.entities;
 
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "location")
+@Table(name = "locations")
 public class Location {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-
-    @Column(nullable = false)
+    @GeneratedValue
+    private long id;
     private String nome;
+    private String citta;
 
-    @Column(nullable = false)
-    private String città;
+    public Location() { }
 
-    @ManyToOne
-    @JoinTable(
-
-    )
-    private Evento evento;
-
-    public Location() {
-    }
-
-    public Location(String nome, String città) {
+    public Location(String nome, String citta) {
         this.nome = nome;
-        this.città = città;
+        this.citta = citta;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -48,12 +38,12 @@ public class Location {
         this.nome = nome;
     }
 
-    public String getCittà() {
-        return città;
+    public String getCitta() {
+        return citta;
     }
 
-    public void setCittà(String città) {
-        this.città = città;
+    public void setCitta(String citta) {
+        this.citta = citta;
     }
 
     @Override
@@ -61,7 +51,7 @@ public class Location {
         return "Location{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
-                ", città='" + città + '\'' +
+                ", citta='" + citta + '\'' +
                 '}';
     }
 }

@@ -1,5 +1,5 @@
 package org.example.enumeration;
 
-public enum Sesso {
+public enum TipoSesso {
     M, F
 }

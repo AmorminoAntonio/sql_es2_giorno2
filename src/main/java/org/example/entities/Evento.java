@@ -12,44 +12,32 @@ import java.util.List;
 public class Evento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private long id;
-
     @Column(nullable = false)
     private String titolo;
-
     @Column(nullable = false)
     private LocalDate dataEvento;
-
     private String descrizione;
-
     @Enumerated(EnumType.STRING)
     private TipoEvento tipoEvento;
-
     private int numeroMassimoPartecipanti;
-
-    @ManyToMany(mappedBy = "listaPartecipanti")
-    private List<Persona> listaPartecipanti = new ArrayList<>();
-
     @ManyToOne
-    @JoinTable(
-
-    )
+    @JoinColumn(name = "location_id")
     private Location location;
+    @OneToMany(mappedBy = "evento")
+    private List<Partecipazione> listaPartecipazioni;
 
+    public Evento() {}
 
-    public Evento() {
-    }
-
-
-    public Evento(String titolo, LocalDate dataEvento, String descrizione, TipoEvento tipoEvento, int numeroMassimoPartecipanti, List<Persona> listaPartecipanti, Location location) {
+    public Evento(String titolo, LocalDate dataEvento, String descrizione, TipoEvento tipoEvento, int numeroMassimoPartecipanti, Location location) {
         this.titolo = titolo;
         this.dataEvento = dataEvento;
         this.descrizione = descrizione;
         this.tipoEvento = tipoEvento;
         this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
-        this.listaPartecipanti = listaPartecipanti;
         this.location = location;
+        this.listaPartecipazioni = new ArrayList<Partecipazione>();
     }
 
     public long getId() {
@@ -100,20 +88,20 @@ public class Evento {
         this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
     }
 
-    public List<Persona> getListaPartecipanti() {
-        return listaPartecipanti;
-    }
-
-    public void setListaPartecipanti(List<Persona> listaPartecipanti) {
-        this.listaPartecipanti = listaPartecipanti;
-    }
-
     public Location getLocation() {
         return location;
     }
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public List<Partecipazione> getListaPartecipazioni() {
+        return listaPartecipazioni;
+    }
+
+    public void setListaPartecipazioni(List<Partecipazione> listaPartecipazioni) {
+        this.listaPartecipazioni = listaPartecipazioni;
     }
 
     @Override
@@ -125,8 +113,8 @@ public class Evento {
                 ", descrizione='" + descrizione + '\'' +
                 ", tipoEvento=" + tipoEvento +
                 ", numeroMassimoPartecipanti=" + numeroMassimoPartecipanti +
-                ", listaPartecipanti=" + listaPartecipanti +
                 ", location=" + location +
+                ", listaPartecipazioni=" + listaPartecipazioni +
                 '}';
     }
 }

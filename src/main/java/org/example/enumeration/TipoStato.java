@@ -1,5 +1,5 @@
 package org.example.enumeration;
 
-public enum Stato {
+public enum TipoStato {
     CONFERMATA, DA_CONFERMARE
 }
