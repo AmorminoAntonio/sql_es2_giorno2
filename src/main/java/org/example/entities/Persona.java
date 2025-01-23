@@ -12,15 +12,19 @@ import java.util.List;
 public class Persona {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
     private String cognome;
+
     @Column(unique = true)
     private String email;
+
     private LocalDate dataDiNascita;
+
     @Enumerated(EnumType.STRING)
     private TipoSesso sesso;
+
     @OneToMany(mappedBy = "persona")
     private List<Partecipazione> listaPartecipazioni;
 

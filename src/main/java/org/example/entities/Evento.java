@@ -7,24 +7,36 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "eventi")
+
 public class Evento {
 
     @Id
     @GeneratedValue
     private long id;
+
+
     @Column(nullable = false)
     private String titolo;
+
+
     @Column(nullable = false)
     private LocalDate dataEvento;
+
+
     private String descrizione;
+
     @Enumerated(EnumType.STRING)
     private TipoEvento tipoEvento;
+
+
     private int numeroMassimoPartecipanti;
+
+
     @ManyToOne
     @JoinColumn(name = "location_id")
     private Location location;
+
+
     @OneToMany(mappedBy = "evento")
     private List<Partecipazione> listaPartecipazioni;
 

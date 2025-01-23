@@ -27,4 +27,8 @@ public class EventoDAO {
         em.remove(e);
         em.getTransaction().commit();
     }
+
+    public void getConcertiInStreaming(){
+
+    }
 }
